@@ -13,6 +13,7 @@ string tokenTypeToString(TokenType type) {
         case MINUS:   return "MINUS";
         case MULTIPLY: return "MULTIPLY";
         case DIVIDE:  return "DIVIDE";
+        case EXPONENT: return "EXPONENT";
         case LPAREN:  return "LPAREN";
         case RPAREN:  return "RPAREN";
         case UNKNOWN: return "UNKNOWN";

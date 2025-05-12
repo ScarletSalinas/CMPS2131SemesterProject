@@ -48,6 +48,7 @@ Token Scanner::getNextToken() {
         case '-': pos++; return { MINUS, "-" };
         case '*': pos++; return { MULTIPLY, "*" };
         case '/': pos++; return { DIVIDE, "/" };
+        case '^': pos++; return { EXPONENT, "^" };  
         case '(': pos++; return { LPAREN, "(" };
         case ')': pos++; return { RPAREN, ")" };
         default:  pos++; return { UNKNOWN, string(1, current) };
