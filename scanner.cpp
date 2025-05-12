@@ -3,50 +3,53 @@
 
 using namespace std;
 
-// Constructor - stores input string
 Scanner::Scanner(const string& input) : input(input) {}
 
-// Moves position past any whitespace
 void Scanner::skipWhitespace() {
     while (pos < input.length() && isspace(input[pos])) {
-        pos++; // Advance past spaces/tabs/newlines
+        pos++;
     }
 }
 
-// Check if character is valid for a variable name
 bool Scanner::isVariableChar(char c) {
-    return isalpha(c);  // Returns true for a-z, A-Z
+    return isalpha(c);  // a-z, A-Z
 }
 
-// Main scanning function - returns next token
 Token Scanner::getNextToken() {
-    skipWhitespace(); // First skip any whitespace
+    skipWhitespace();
     
-    // Check for end of input
     if (pos >= input.length()) {
         return { END_OF_INPUT, "" };
     }
 
-    char current = input[pos++];    // Get current character and advance
+    char current = input[pos]; // Don't advance pos yet
     
-    // Check for digits
-    if (isdigit(current)) {
-        return { DIGIT, string(1, current) }; // Return digit token
+    // Handle numbers (including negatives)
+    if (isdigit(current) || (current == '-' && pos+1 < input.length() && isdigit(input[pos+1]))) {
+        string num;
+        if (current == '-') {
+            num += input[pos++]; // Include '-' and advance
+        }
+        while (pos < input.length() && isdigit(input[pos])) {
+            num += input[pos++];
+        }
+        return { NUMBER, num };
     }
 
-    // Check for variables
+    // Handle variables
     if (isVariableChar(current)) {
-        return { VARIABLE, std::string(1, current) };
+        pos++; // Advance position after reading variable
+        return { VARIABLE, string(1, current) };
     }
 
-    // Check for arithmetic operators
+    // Handle operators/symbols
     switch(current) {
-        case '+' : return { PLUS, "+"};
-        case '-' : return { MINUS, "-"};
-        case '*' : return { MULTIPLY, "*"};
-        case '/' : return { DIVIDE, "/"};
-        case '(': return { LPAREN, "(" };
-        case ')': return { RPAREN, ")" };
-        default: return { UNKNOWN, string(1, current) };
+        case '+': pos++; return { PLUS, "+" };
+        case '-': pos++; return { MINUS, "-" };
+        case '*': pos++; return { MULTIPLY, "*" };
+        case '/': pos++; return { DIVIDE, "/" };
+        case '(': pos++; return { LPAREN, "(" };
+        case ')': pos++; return { RPAREN, ")" };
+        default:  pos++; return { UNKNOWN, string(1, current) };
     }
 }

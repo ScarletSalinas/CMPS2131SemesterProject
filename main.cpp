@@ -5,6 +5,21 @@
 
 using namespace std;
 
+string tokenTypeToString(TokenType type) {
+    switch (type) {
+        case NUMBER:   return "NUMBER";
+        case VARIABLE: return "VARIABLE";
+        case PLUS:    return "PLUS";
+        case MINUS:   return "MINUS";
+        case MULTIPLY: return "MULTIPLY";
+        case DIVIDE:  return "DIVIDE";
+        case LPAREN:  return "LPAREN";
+        case RPAREN:  return "RPAREN";
+        case UNKNOWN: return "UNKNOWN";
+        default:      return "OTHER";
+    }
+}
+
 int main() {
     // Get input from user
     string input;
@@ -24,28 +39,12 @@ int main() {
         tokens.push_back(token);    // Add token to list
     }
 
-   // Print all tokens with description
-    for (size_t i = 0; i < tokens.size(); i++) {
-        const Token& token = tokens[i];
-        std::cout << "Token(Type: ";
-        
-        // Print token type name
-        switch (token.type) {
-            case DIGIT:   std::cout << "DIGIT"; break;
-            case VARIABLE: std::cout << "VARIABLE"; break;
-            case PLUS:    std::cout << "PLUS"; break;
-            case MINUS:   std::cout << "MINUS"; break;
-            case MULTIPLY: std::cout << "MULTIPLY"; break;
-            case DIVIDE:  std::cout << "DIVIDE"; break;
-            case LPAREN:  std::cout << "LPAREN"; break;
-            case RPAREN:  std::cout << "RPAREN"; break;
-            case UNKNOWN: std::cout << "UNKNOWN"; break;
-        }
-        
-        // Print token value
-        std::cout << ", Value: \"" << token.value << "\")\n";
+   // Print tokens
+   for (const auto& token : tokens) {
+    std::cout << "Token(" 
+              << "Type: " << tokenTypeToString(token.type) << ", "
+              << "Value: \"" << token.value << "\")\n";
     }
 
-return 0;
+    return 0;
 }
-
