@@ -4,6 +4,7 @@
 
 using namespace std;
 
+/* Pretty-prints token type */
 string tokenTypeToString(TokenType type) {
     switch (type) {
         case NUMBER:   return "NUMBER";
@@ -12,6 +13,7 @@ string tokenTypeToString(TokenType type) {
         case MINUS:   return "MINUS";
         case MULTIPLY: return "MULTIPLY";
         case DIVIDE:  return "DIVIDE";
+        case EXPONENT: return "EXPONENT";
         case LPAREN:  return "LPAREN";
         case RPAREN:  return "RPAREN";
         case UNKNOWN: return "UNKNOWN";
@@ -41,6 +43,5 @@ int main() {
                   << "Value: \"" << token.value << "\")\n";
     }
 
-return 0;
+    return 0;
 }
-

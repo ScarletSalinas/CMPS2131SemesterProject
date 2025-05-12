@@ -18,7 +18,7 @@ enum TokenType {
     END_OF_INPUT    // Special token indicating end of input
 };
 
-// Represents a token with type and literal alue
+// Represents a single token found in input
 struct Token {
     TokenType type;     // What kind of token (DIGIT/UNKNOWN/etc.)
     string value;  // The actual character(s) matched
