@@ -1,51 +1,46 @@
-#include <cctype>
 #include <iostream>
-#include "scanner.h"
 #include <vector>
+#include "scanner.h"
 
 using namespace std;
 
-int main() {
-    // Get input from user
-    string input;
-    cout << "Enter arithmetic expression: ";
-    getline(cin, input);
-
-    // Create scanner with input
-    Scanner scanner(input);
-    vector<Token> tokens;   // Store all tokens here
-
-    // Tokenize input
-    while (true) {
-        Token token = scanner.getNextToken();
-        if (token.type == END_OF_INPUT) {
-            break;  // Stop when input ends
-        } 
-        tokens.push_back(token);    // Add token to list
+/* Pretty-prints token type */
+string tokenTypeToString(TokenType type) {
+    switch (type) {
+        case NUMBER:   return "NUMBER";
+        case VARIABLE: return "VARIABLE";
+        case PLUS:    return "PLUS";
+        case MINUS:   return "MINUS";
+        case MULTIPLY: return "MULTIPLY";
+        case DIVIDE:  return "DIVIDE";
+        case LPAREN:  return "LPAREN";
+        case RPAREN:  return "RPAREN";
+        case UNKNOWN: return "UNKNOWN";
+        default:      return "OTHER";
     }
-
-   // Print all tokens with description
-    for (size_t i = 0; i < tokens.size(); i++) {
-        const Token& token = tokens[i];
-        std::cout << "Token(Type: ";
-        
-        // Print token type name
-        switch (token.type) {
-            case DIGIT:   std::cout << "DIGIT"; break;
-            case VARIABLE: std::cout << "VARIABLE"; break;
-            case PLUS:    std::cout << "PLUS"; break;
-            case MINUS:   std::cout << "MINUS"; break;
-            case MULTIPLY: std::cout << "MULTIPLY"; break;
-            case DIVIDE:  std::cout << "DIVIDE"; break;
-            case LPAREN:  std::cout << "LPAREN"; break;
-            case RPAREN:  std::cout << "RPAREN"; break;
-            case UNKNOWN: std::cout << "UNKNOWN"; break;
-        }
-        
-        // Print token value
-        std::cout << ", Value: \"" << token.value << "\")\n";
-    }
-
-return 0;
 }
 
+int main() {
+    string input;
+    cout << "Enter expression: ";
+    getline(cin, input);
+
+    Scanner scanner(input);
+    vector<Token> tokens;
+
+    /* Tokenize input */
+    while (true) {
+        Token token = scanner.getNextToken();
+        if (token.type == END_OF_INPUT) break;
+        tokens.push_back(token);
+    }
+
+    /* Print tokens */
+    for (const auto& token : tokens) {
+        cout << "Token(" 
+                  << "Type: " << tokenTypeToString(token.type) << ", "
+                  << "Value: \"" << token.value << "\")\n";
+    }
+
+    return 0;
+}
