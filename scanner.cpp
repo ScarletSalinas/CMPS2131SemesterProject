@@ -22,14 +22,21 @@ Token Scanner::getNextToken() {
         return { END_OF_INPUT, "" };
     }
 
-    char current = input[pos]; // Don't advance pos yet
+    char current = input[pos];
     
-    // Handle numbers (including negatives)
-    if (isdigit(current) || (current == '-' && pos+1 < input.length() && isdigit(input[pos+1]))) {
+    // Handle negative numbers
+    if (current == '-' && pos+1 < input.length() && isdigit(input[pos+1])) {
         string num;
-        if (current == '-') {
-            num += input[pos++]; // Include '-' and advance
+        num += input[pos++]; // Consume '-'
+        while (pos < input.length() && isdigit(input[pos])) {
+            num += input[pos++];
         }
+        return { NUMBER, num };
+    }
+
+    // Handle positive numbers 
+    if (isdigit(current)) {
+        string num;
         while (pos < input.length() && isdigit(input[pos])) {
             num += input[pos++];
         }
