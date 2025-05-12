@@ -36,7 +36,7 @@ Token Scanner::getNextToken() {
         return { NUMBER, num };
     }
 
-    // Handle variables (FIXED: missing pos++)
+    // Handle variables
     if (isVariableChar(current)) {
         pos++; // Advance position after reading variable
         return { VARIABLE, string(1, current) };
