@@ -5,12 +5,13 @@ using namespace std;
 
 // All possible token types the scanner can produce
 enum TokenType {
-    NUMBER,     // Handles both positive and negative (e.g., "42", "-3")
+    NUMBER,         // Handles both positive and negative (e.g., "42", "-3")
     VARIABLE,       // Single-letter variable (a-z, A-Z)
     PLUS,           // Addition operator '+'
     MINUS,          // Subtraction operator '-'
     MULTIPLY,       // Multiplication operator '*'
     DIVIDE,         // Division operator '/'
+    EXPONENT,       // Exponents operator '^' 
     LPAREN,         // Left parenthesis '('
     RPAREN,         // Right parenthesis ')'
     UNKNOWN,        // Any unrecognized character

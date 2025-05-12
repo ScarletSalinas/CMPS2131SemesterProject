@@ -36,7 +36,7 @@ Token Scanner::getNextToken() {
         return { NUMBER, num };
     }
 
-    // Handle variables
+    // Handle variables (FIXED: missing pos++)
     if (isVariableChar(current)) {
         pos++; // Advance position after reading variable
         return { VARIABLE, string(1, current) };
@@ -44,12 +44,12 @@ Token Scanner::getNextToken() {
 
     // Handle operators/symbols
     switch(current) {
-        case '+': pos++; return { PLUS, "+" };
-        case '-': pos++; return { MINUS, "-" };
-        case '*': pos++; return { MULTIPLY, "*" };
-        case '/': pos++; return { DIVIDE, "/" };
-        case '(': pos++; return { LPAREN, "(" };
-        case ')': pos++; return { RPAREN, ")" };
-        default:  pos++; return { UNKNOWN, string(1, current) };
+        case '+' : return { PLUS, "+"};
+        case '-' : return { MINUS, "-"};
+        case '*' : return { MULTIPLY, "*"};
+        case '/' : return { DIVIDE, "/"};
+        case '(': return { LPAREN, "(" };
+        case ')': return { RPAREN, ")" };
+        default: return { UNKNOWN, string(1, current) };
     }
 }

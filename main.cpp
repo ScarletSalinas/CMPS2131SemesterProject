@@ -1,7 +1,6 @@
-#include <cctype>
 #include <iostream>
-#include "scanner.h"
 #include <vector>
+#include "scanner.h"
 
 using namespace std;
 
@@ -21,30 +20,27 @@ string tokenTypeToString(TokenType type) {
 }
 
 int main() {
-    // Get input from user
     string input;
-    cout << "Enter arithmetic expression: ";
+    cout << "Enter expression: ";
     getline(cin, input);
 
-    // Create scanner with input
     Scanner scanner(input);
-    vector<Token> tokens;   // Store all tokens here
+    vector<Token> tokens;
 
-    // Tokenize input
+    /* Tokenize input */
     while (true) {
         Token token = scanner.getNextToken();
-        if (token.type == END_OF_INPUT) {
-            break;  // Stop when input ends
-        } 
-        tokens.push_back(token);    // Add token to list
+        if (token.type == END_OF_INPUT) break;
+        tokens.push_back(token);
     }
 
-   // Print tokens
-   for (const auto& token : tokens) {
-    std::cout << "Token(" 
-              << "Type: " << tokenTypeToString(token.type) << ", "
-              << "Value: \"" << token.value << "\")\n";
+    /* Print tokens */
+    for (const auto& token : tokens) {
+        cout << "Token(" 
+                  << "Type: " << tokenTypeToString(token.type) << ", "
+                  << "Value: \"" << token.value << "\")\n";
     }
 
-    return 0;
+return 0;
 }
+
