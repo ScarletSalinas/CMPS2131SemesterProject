@@ -4,6 +4,10 @@
 // All possible token types the scanner can produce
 enum TokenType {
     DIGIT,          // single digit (0-9)
+    PLUS,           // Addition operator '+'
+    MINUS,          // Subtraction operator '-'
+    MULTIPLY,       // Multiplication operator '*'
+    DIVIDE,         // Division operator '/'
     UNKNOWN,        // Any unrecognized character
     END_OF_INPUT    // Special token indicating end of input
 };

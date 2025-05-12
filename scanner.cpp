@@ -1,8 +1,10 @@
 #include "scanner.h"
 #include <cctype> // For isdigit(), isspace()
 
+using namespace std;
+
 // Constructor - stores input string
-Scanner::Scanner(const std::string& input) : input(input) {}
+Scanner::Scanner(const string& input) : input(input) {}
 
 // Moves position past any whitespace
 void Scanner::skipWhitespace() {
@@ -20,15 +22,19 @@ Token Scanner::getNextToken() {
         return { END_OF_INPUT, "" };
     }
 
-    // Handle digits (0-9)
-    if (isdigit(input[pos])) {
-        std::string digit(1, input[pos]); // Convert char to string
-        pos++; // Move to next character
-        return { DIGIT, digit }; // Return digit token
+    char current = input[pos++];    // Get current character and advance
+    
+    // Check for digits
+    if (isdigit(current)) {
+        return { DIGIT, string(1, current) }; // Return digit token
     }
 
-    // If not a digit, treat as unknown
-    std::string unknown(1, input[pos]);
-    pos++;
-    return { UNKNOWN, unknown };
+    // Check for arithmetic operators
+    switch(current) {
+        case '+' : return { PLUS, "+"};
+        case '-' : return { MINUS, "-"};
+        case '*' : return { MULTIPLY, "*"};
+        case '/' : return { DIVIDE, "/"};
+        default: return { UNKNOWN, string(1, current) };
+    }
 }
