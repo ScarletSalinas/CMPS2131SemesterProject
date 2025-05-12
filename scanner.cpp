@@ -35,6 +35,8 @@ Token Scanner::getNextToken() {
         case '-' : return { MINUS, "-"};
         case '*' : return { MULTIPLY, "*"};
         case '/' : return { DIVIDE, "/"};
+        case '(': return { LPAREN, "(" };
+        case ')': return { RPAREN, ")" };
         default: return { UNKNOWN, string(1, current) };
     }
 }

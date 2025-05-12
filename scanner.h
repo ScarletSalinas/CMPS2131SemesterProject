@@ -9,6 +9,8 @@ enum TokenType {
     MULTIPLY,       // Multiplication operator '*'
     DIVIDE,         // Division operator '/'
     UNKNOWN,        // Any unrecognized character
+    LPAREN,         // Left parenthesis '('
+    RPAREN,         // Right parenthesis ')'
     END_OF_INPUT    // Special token indicating end of input
 };
 
