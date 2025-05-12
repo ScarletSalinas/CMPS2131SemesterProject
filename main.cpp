@@ -8,14 +8,14 @@ using namespace std;
 int main() {
     // Get input from user
     string input;
-    cout << "Enter input: ";
+    cout << "Enter arithmetic expression: ";
     getline(cin, input);
 
     // Create scanner with input
     Scanner scanner(input);
     vector<Token> tokens;   // Store all tokens here
 
-    // Scan tokens until end of input
+    // Tokenize input
     while (true) {
         Token token = scanner.getNextToken();
         if (token.type == END_OF_INPUT) {
@@ -24,7 +24,7 @@ int main() {
         tokens.push_back(token);    // Add token to list
     }
 
-   // Print all found tokens
+   // Print all tokens with description
     for (size_t i = 0; i < tokens.size(); i++) {
         const Token& token = tokens[i];
         std::cout << "Token(Type: ";
@@ -32,6 +32,10 @@ int main() {
         // Print token type name
         switch (token.type) {
             case DIGIT:   std::cout << "DIGIT"; break;
+            case PLUS:    std::cout << "PLUS"; break;
+            case MINUS:   std::cout << "MINUS"; break;
+            case MULTIPLY: std::cout << "MULTIPLY"; break;
+            case DIVIDE:  std::cout << "DIVIDE"; break;
             case UNKNOWN: std::cout << "UNKNOWN"; break;
             default:      std::cout << "OTHER";
         }
