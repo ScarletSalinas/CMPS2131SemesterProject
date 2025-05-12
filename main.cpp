@@ -36,8 +36,9 @@ int main() {
             case MINUS:   std::cout << "MINUS"; break;
             case MULTIPLY: std::cout << "MULTIPLY"; break;
             case DIVIDE:  std::cout << "DIVIDE"; break;
+            case LPAREN:  std::cout << "LPAREN"; break;
+            case RPAREN:  std::cout << "RPAREN"; break;
             case UNKNOWN: std::cout << "UNKNOWN"; break;
-            default:      std::cout << "OTHER";
         }
         
         // Print token value
