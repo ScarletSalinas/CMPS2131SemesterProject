@@ -4,6 +4,7 @@
 // All possible token types the scanner can produce
 enum TokenType {
     DIGIT,          // single digit (0-9)
+    VARIABLE,       // Single-letter variable (a-z, A-Z)
     PLUS,           // Addition operator '+'
     MINUS,          // Subtraction operator '-'
     MULTIPLY,       // Multiplication operator '*'
@@ -32,4 +33,7 @@ private:
     
     // Helper to skip whitespace characters
     void skipWhitespace();
+
+    //Helper to check if char is valid for var
+    bool isVariableChar(char c);
 };

@@ -13,6 +13,11 @@ void Scanner::skipWhitespace() {
     }
 }
 
+// Check if character is valid for a variable name
+bool Scanner::isVariableChar(char c) {
+    return isalpha(c);  // Returns true for a-z, A-Z
+}
+
 // Main scanning function - returns next token
 Token Scanner::getNextToken() {
     skipWhitespace(); // First skip any whitespace
@@ -27,6 +32,11 @@ Token Scanner::getNextToken() {
     // Check for digits
     if (isdigit(current)) {
         return { DIGIT, string(1, current) }; // Return digit token
+    }
+
+    // Check for variables
+    if (isVariableChar(current)) {
+        return { VARIABLE, std::string(1, current) };
     }
 
     // Check for arithmetic operators

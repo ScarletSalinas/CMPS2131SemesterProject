@@ -32,6 +32,7 @@ int main() {
         // Print token type name
         switch (token.type) {
             case DIGIT:   std::cout << "DIGIT"; break;
+            case VARIABLE: std::cout << "VARIABLE"; break;
             case PLUS:    std::cout << "PLUS"; break;
             case MINUS:   std::cout << "MINUS"; break;
             case MULTIPLY: std::cout << "MULTIPLY"; break;
